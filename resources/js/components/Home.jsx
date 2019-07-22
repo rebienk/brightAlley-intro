@@ -3,11 +3,10 @@ import React from "react";
 const Home = () => {
     return (
         <div>
-            <Layout>
-                <Header>Header</Header>
-                <Content>Content</Content>
-                <Footer>Footer</Footer>
-            </Layout>
+            <h1>Hommmmee</h1>
         </div>
     );
 };
+
+export default Home;
+
