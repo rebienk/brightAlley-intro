@@ -13,23 +13,10 @@ class Main extends Component {
 
             <Router >
                 <div className="navbar">
-                    <ul>
-                        <li>
-                            <Link to="/home">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/posts">Posts</Link>
-                        </li>
-                        <li>
-                            <Link to="/logout">Logout</Link>
-                        </li>
-                    </ul>
 
                     <hr />
 
-                    <Route path="/start" component={Home}/>
-                    <Route path="/posts" component={Posts} />
-                    <Route path="/logout" component={Logout} />
+                    <Route path="/start" component={Posts}/>
                 </div>
             </Router>
         );
