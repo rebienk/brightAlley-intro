@@ -15,7 +15,7 @@ class Main extends Component {
                 <div className="navbar">
                     <ul>
                         <li>
-                            <Link to="/start">Home</Link>
+                            <Link to="/home">Home</Link>
                         </li>
                         <li>
                             <Link to="/posts">Posts</Link>
