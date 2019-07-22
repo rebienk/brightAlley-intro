@@ -25,6 +25,15 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
+    { }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|min:3|max:191|string',
@@ -33,7 +42,7 @@ class PostController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Not a valid post!'
+                'error' => 'Not a valid post.'
             ], 201);
         }
 
@@ -44,19 +53,8 @@ class PostController extends Controller
         $post->save();
 
         return response()->json([
-            'message' => 'Post successfully created!'
+            'message' => 'Post successfully created.'
         ], 201);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -65,9 +63,16 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        //
+        if ($post = Post::where('id', '=', $id)->first()) 
+        {
+            return $post;
+        } else {
+            return response()->json([
+                'error' => 'Post does not exist.'
+            ], 201);
+        }
     }
 
     /**
