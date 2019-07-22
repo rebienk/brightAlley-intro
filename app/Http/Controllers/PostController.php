@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -23,9 +24,28 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|min:3|max:191|string',
+            'description' => 'required|string|max:300|string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Not a valid post!'
+            ], 201);
+        }
+
+        // Create new empty post object and filling it before we can save
+        $post = new Post;
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->save();
+
+        return response()->json([
+            'message' => 'Post successfully created!'
+        ], 201);
     }
 
     /**
